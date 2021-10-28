@@ -7,7 +7,6 @@
         @path="getPath($event)"
         currentPath="/"
         :displayedPath="path"
-        :isFocused="true"
       ></tree-item>
     </ul>
   </div>
@@ -38,6 +37,13 @@ export default {
     getPath(path) {
       this.path = path
     }
+  },
+  mounted() {
+    window.addEventListener('keyup', e => {
+      if (this.$el.querySelector('.item__content ul') === null && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+        this.$el.querySelector('.item__main').focus();
+      }
+    })
   }
 }
 </script>
